@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
+import 'package:todo_app_flutter/controller/task_controller.dart';
 import 'package:todo_app_flutter/services/notification_services.dart';
 import 'package:todo_app_flutter/services/theme_service.dart';
 import 'package:todo_app_flutter/ui/theme.dart';
@@ -21,6 +22,7 @@ class _HomePageState extends State<HomePage> {
 
   DateTime _selectedDate = DateTime.now();
 
+  final _taskController = Get.put(TaskController());
   var notifyHelper;
 
   @override
@@ -40,8 +42,31 @@ class _HomePageState extends State<HomePage> {
         children: [
           _addTaskBar(),
           _addDateBar(),
+          SizedBox(height: 10,),
+          _showTasks(),
         ],
       ),
+    );
+  }
+
+  _showTasks(){
+    return Expanded(
+        child: Obx((){
+          return ListView.builder(
+            physics: const BouncingScrollPhysics(),
+            itemCount: _taskController.taskList.length,
+              itemBuilder: (_, index){
+              print(_taskController.taskList.length);
+                return Container(
+                  margin: EdgeInsets.only(bottom: 10),
+                  width: 100,
+                  height: 50,
+                  color: Colors.green,
+                  child: Text(_taskController.reversedTaskList[index].title!),
+                );
+              }
+          );
+        })
     );
   }
 
@@ -102,13 +127,15 @@ class _HomePageState extends State<HomePage> {
               ],
             ),
           ),
-          MyButton(label: '+ Add Task', onTap: (){
-            Get.to(AddTaskPage());
+          MyButton(label: '+ Add Task', onTap: () async{
+            await Get.to(AddTaskPage());
+            _taskController.getTasks();
           })
         ],
       ),
     );
   }
+
   _appBar() {
     return AppBar(
       elevation: 0,
