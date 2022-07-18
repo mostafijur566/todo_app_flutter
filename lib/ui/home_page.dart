@@ -45,13 +45,42 @@ class _HomePageState extends State<HomePage> {
           _addTaskBar(),
           _addDateBar(),
           SizedBox(height: 10,),
-          
+          _showTasks(),
         ],
       ),
     );
   }
 
-
+  _showTasks(){
+    return Expanded(
+        child: Obx((){
+          return ListView.builder(
+            physics: const BouncingScrollPhysics(),
+            itemCount: _taskController.taskList.length,
+              itemBuilder: (_, index){
+              print(_taskController.taskList.length);
+                return AnimationConfiguration.staggeredList(
+                    position: index,
+                    child: SlideAnimation(
+                      child: FadeInAnimation(
+                        child: Row(
+                          children: [
+                            GestureDetector(
+                              onTap: (){
+                               
+                              },
+                              child: TaskTile(_taskController.reversedTaskList[index]),
+                            )
+                          ],
+                        ),
+                      ),
+                    )
+                );
+              }
+          );
+        })
+    );
+  }
 
   _addDateBar(){
     return Container(
