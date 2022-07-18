@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:todo_app_flutter/controller/task_controller.dart';
 import 'package:todo_app_flutter/ui/theme.dart';
 import 'package:todo_app_flutter/widgets/button.dart';
 import 'package:todo_app_flutter/widgets/input_field.dart';
+
+import '../models/task_model.dart';
 
 class AddTaskPage extends StatefulWidget {
   const AddTaskPage({Key? key}) : super(key: key);
@@ -13,6 +16,8 @@ class AddTaskPage extends StatefulWidget {
 }
 
 class _AddTaskPageState extends State<AddTaskPage> {
+
+  final TaskController _taskController = Get.put(TaskController());
 
   TextEditingController _titleController = TextEditingController();
   TextEditingController _noteController = TextEditingController();
@@ -150,7 +155,7 @@ class _AddTaskPageState extends State<AddTaskPage> {
                 children: [
                   _colorPlate(),
                   MyButton(label: "Create Task", onTap: (){
-                    
+                    _validateData();
                   })
                 ],
               )
@@ -159,6 +164,34 @@ class _AddTaskPageState extends State<AddTaskPage> {
         ),
       ),
     );
+  }
+
+  _validateData(){
+    if(_titleController.text.isEmpty){
+      Get.snackbar(
+          'Required!',
+          'Title field is required!',
+        snackPosition: SnackPosition.TOP,
+        backgroundColor: Get.isDarkMode ? Colors.white : darkHeaderClr,
+        icon: Icon(Icons.warning_amber_rounded, color: Colors.red,),
+        colorText: Colors.red
+      );
+    }
+
+    else if(_noteController.text.isEmpty){
+      Get.snackbar(
+          'Required!',
+          'Note field is required!',
+          snackPosition: SnackPosition.TOP,
+          backgroundColor: Get.isDarkMode ? Colors.white : darkHeaderClr,
+          icon: Icon(Icons.warning_amber_rounded, color: Colors.red,),
+          colorText: Colors.red
+      );
+    }
+
+    else{
+      Get.back();
+    }
   }
 
 
