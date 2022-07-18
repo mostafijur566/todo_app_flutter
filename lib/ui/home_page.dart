@@ -8,6 +8,8 @@ import 'package:todo_app_flutter/services/theme_service.dart';
 import 'package:todo_app_flutter/ui/theme.dart';
 import 'package:todo_app_flutter/widgets/button.dart';
 
+import 'add_task_page.dart';
+
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
@@ -82,7 +84,7 @@ class _HomePageState extends State<HomePage> {
 
   _addTaskBar(){
     return Container(
-      margin: EdgeInsets.only(left: 20, right: 20),
+      margin: EdgeInsets.only(left: 20, right: 20, top: 10),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -99,7 +101,9 @@ class _HomePageState extends State<HomePage> {
               ],
             ),
           ),
-          MyButton(label: '+ Add Task', onTap: (){})
+          MyButton(label: '+ Add Task', onTap: (){
+            Get.to(AddTaskPage());
+          })
         ],
       ),
     );
