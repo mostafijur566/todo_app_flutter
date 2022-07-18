@@ -190,10 +190,25 @@ class _AddTaskPageState extends State<AddTaskPage> {
     }
 
     else{
+      _addTaskToDB();
       Get.back();
     }
   }
 
+  _addTaskToDB() async{
+    int value = await _taskController.addTask(task: Task(
+      note: _noteController.text,
+      title: _titleController.text,
+      date: DateFormat.yMd().format(_selectedDate),
+      startTime: _startTime,
+      endTime: _endTime,
+      remind: _selectedRemind,
+      repeat: _selectedRepeat,
+      color: _selectedColor,
+      isCompleted: 0,
+    ));
+    print('id $value');
+  }
 
   _colorPlate(){
     return  Column(
