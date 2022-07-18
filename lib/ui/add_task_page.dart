@@ -14,6 +14,9 @@ class AddTaskPage extends StatefulWidget {
 
 class _AddTaskPageState extends State<AddTaskPage> {
 
+  TextEditingController _titleController = TextEditingController();
+  TextEditingController _noteController = TextEditingController();
+
   DateTime _selectedDate = DateTime.now();
   String _startTime = DateFormat('hh:mm a').format(DateTime.now()).toString();
   String _endTime = "9:30 PM";
@@ -49,8 +52,8 @@ class _AddTaskPageState extends State<AddTaskPage> {
               Text('Add Task',
                 style: headingStyle,
               ),
-              MyInputField(title: "Title", hint: "Enter your title"),
-              MyInputField(title: "Note", hint: "Enter your note"),
+              MyInputField(title: "Title", hint: "Enter your title", controller: _titleController,),
+              MyInputField(title: "Note", hint: "Enter your note", controller: _noteController,),
               MyInputField(title: "Date", hint: DateFormat.yMd().format(_selectedDate),
                 widget: IconButton(
                   onPressed: (){
@@ -146,7 +149,9 @@ class _AddTaskPageState extends State<AddTaskPage> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   _colorPlate(),
-                  MyButton(label: "Create Task", onTap: (){})
+                  MyButton(label: "Create Task", onTap: (){
+                    
+                  })
                 ],
               )
             ],
@@ -155,6 +160,7 @@ class _AddTaskPageState extends State<AddTaskPage> {
       ),
     );
   }
+
 
   _colorPlate(){
     return  Column(
