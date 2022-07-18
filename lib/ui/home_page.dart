@@ -1,5 +1,6 @@
 import 'package:date_picker_timeline/date_picker_timeline.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
@@ -9,6 +10,7 @@ import 'package:todo_app_flutter/services/theme_service.dart';
 import 'package:todo_app_flutter/ui/theme.dart';
 import 'package:todo_app_flutter/widgets/button.dart';
 
+import '../widgets/task_tile.dart';
 import 'add_task_page.dart';
 
 class HomePage extends StatefulWidget {
@@ -43,32 +45,13 @@ class _HomePageState extends State<HomePage> {
           _addTaskBar(),
           _addDateBar(),
           SizedBox(height: 10,),
-          _showTasks(),
+          
         ],
       ),
     );
   }
 
-  _showTasks(){
-    return Expanded(
-        child: Obx((){
-          return ListView.builder(
-            physics: const BouncingScrollPhysics(),
-            itemCount: _taskController.taskList.length,
-              itemBuilder: (_, index){
-              print(_taskController.taskList.length);
-                return Container(
-                  margin: EdgeInsets.only(bottom: 10),
-                  width: 100,
-                  height: 50,
-                  color: Colors.green,
-                  child: Text(_taskController.reversedTaskList[index].title!),
-                );
-              }
-          );
-        })
-    );
-  }
+
 
   _addDateBar(){
     return Container(
