@@ -38,6 +38,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       backgroundColor: context.theme.backgroundColor,
       appBar: _appBar(),
@@ -59,11 +60,9 @@ class _HomePageState extends State<HomePage> {
             physics: const BouncingScrollPhysics(),
             itemCount: _taskController.taskList.length,
               itemBuilder: (_, index){
-              print(_taskController.taskList.length);
               Task task = _taskController.reversedTaskList[index];
 
               if(task.repeat == 'Daily'){
-
                 DateTime date = DateFormat.jm().parse(task.startTime.toString());
                 var myTime = DateFormat("HH:mm").format(date);
 
@@ -121,10 +120,11 @@ class _HomePageState extends State<HomePage> {
                     )
                 );
               }
+
               else{
                 return Container();
               }
-              }
+            }
           );
         })
     );
@@ -291,13 +291,6 @@ class _HomePageState extends State<HomePage> {
           color: Get.isDarkMode ? Colors.white : Colors.black,
         ),
       ),
-      actions: [
-        Icon(
-          Icons.person,
-          size: 20,
-        ),
-        SizedBox(width: 20,),
-      ],
     );
   }
 }
