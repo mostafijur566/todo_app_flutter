@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:todo_app_flutter/ui/theme.dart';
+import 'package:todo_app_flutter/utils/dimensions.dart';
 
 class MyButton extends StatelessWidget {
   const MyButton({Key? key, required this.label, required this.onTap}) : super(key: key);
@@ -12,10 +13,10 @@ class MyButton extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        width: 120,
-        height: 50,
+        width: Dimensions.width120,
+        height: Dimensions.height50,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(20),
+          borderRadius: BorderRadius.circular(Dimensions.height20),
           color: primaryClr
         ),
 

@@ -8,6 +8,7 @@ import 'package:todo_app_flutter/controller/task_controller.dart';
 import 'package:todo_app_flutter/services/notification_services.dart';
 import 'package:todo_app_flutter/services/theme_service.dart';
 import 'package:todo_app_flutter/ui/theme.dart';
+import 'package:todo_app_flutter/utils/dimensions.dart';
 import 'package:todo_app_flutter/widgets/button.dart';
 
 import '../models/task_model.dart';
@@ -34,6 +35,7 @@ class _HomePageState extends State<HomePage> {
     notifyHelper = NotifyHelper();
     notifyHelper.initializeNotification();
     notifyHelper.requestIOSPermissions();
+    print(Dimensions.screenWidth);
   }
 
   @override
@@ -46,7 +48,7 @@ class _HomePageState extends State<HomePage> {
         children: [
           _addTaskBar(),
           _addDateBar(),
-          SizedBox(height: 10,),
+          SizedBox(height: Dimensions.height10,),
           _showTasks(),
         ],
       ),
@@ -141,10 +143,10 @@ class _HomePageState extends State<HomePage> {
         child: Column(
           children: [
             Container(
-              height: 6,
-              width: 120,
+              height: Dimensions.height6,
+              width: Dimensions.width120,
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
+                borderRadius: BorderRadius.circular(Dimensions.height10),
                 color: Get.isDarkMode ? Colors.grey[600] : Colors.grey[300]
               ),
             ),
@@ -170,9 +172,9 @@ class _HomePageState extends State<HomePage> {
                 context: context
             ),
 
-            SizedBox(height: 20,),
+            SizedBox(height: Dimensions.height10,),
             _bottomSheetButton(label: 'Close', onTap: (){}, color: Colors.red[400]!, context: context, isClose: true),
-            SizedBox(height: 10,),
+            SizedBox(height: Dimensions.height10,),
           ],
         ),
       )
@@ -183,16 +185,16 @@ class _HomePageState extends State<HomePage> {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        margin: EdgeInsets.symmetric(vertical: 4,),
-        height: 55,
+        margin: EdgeInsets.symmetric(vertical: Dimensions.height4,),
+        height: Dimensions.height55,
         width: MediaQuery.of(context).size.width * 0.9,
         decoration: BoxDecoration(
           color: isClose == true ? Colors.transparent : color,
           border: Border.all(
-            width: 2,
+            width: Dimensions.width2,
             color: isClose == true ? Get.isDarkMode ? Colors.grey[600]! : Colors.grey[300]! : color
           ),
-          borderRadius: BorderRadius.circular(20)
+          borderRadius: BorderRadius.circular(Dimensions.height20)
         ),
         child: Center(
             child: Text(
@@ -206,31 +208,31 @@ class _HomePageState extends State<HomePage> {
 
   _addDateBar(){
     return Container(
-      margin: EdgeInsets.only(top: 20, left: 20,),
+      margin: EdgeInsets.only(top: Dimensions.height20, left: Dimensions.width20,),
       child: DatePicker(
         DateTime.now(),
-        height: 100,
-        width: 80,
+        height: Dimensions.height100,
+        width: Dimensions.width80,
         initialSelectedDate: DateTime.now(),
         selectionColor: primaryClr,
         selectedTextColor: Colors.white,
         dateTextStyle: GoogleFonts.lato(
             textStyle: TextStyle(
-                fontSize: 20,
+                fontSize: Dimensions.font20,
                 fontWeight: FontWeight.w600,
                 color: Colors.grey
             )
         ),
         dayTextStyle: GoogleFonts.lato(
             textStyle: TextStyle(
-                fontSize: 16,
+                fontSize: Dimensions.font16,
                 fontWeight: FontWeight.w600,
                 color: Colors.grey
             )
         ),
         monthTextStyle: GoogleFonts.lato(
             textStyle: TextStyle(
-                fontSize: 14,
+                fontSize: Dimensions.font14,
                 fontWeight: FontWeight.w600,
                 color: Colors.grey
             )
@@ -246,7 +248,7 @@ class _HomePageState extends State<HomePage> {
 
   _addTaskBar(){
     return Container(
-      margin: EdgeInsets.only(left: 20, right: 20, top: 10),
+      margin: EdgeInsets.only(left: Dimensions.width20, right: Dimensions.width20, top: Dimensions.height20),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -287,7 +289,7 @@ class _HomePageState extends State<HomePage> {
         },
         child: Icon(
           Get.isDarkMode ? Icons.wb_sunny_outlined : Icons.nightlight_round,
-          size: 20,
+          size: Dimensions.height20,
           color: Get.isDarkMode ? Colors.white : Colors.black,
         ),
       ),

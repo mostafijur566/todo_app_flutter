@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:todo_app_flutter/controller/task_controller.dart';
 import 'package:todo_app_flutter/ui/theme.dart';
+import 'package:todo_app_flutter/utils/dimensions.dart';
 import 'package:todo_app_flutter/widgets/button.dart';
 import 'package:todo_app_flutter/widgets/input_field.dart';
 
@@ -47,7 +48,7 @@ class _AddTaskPageState extends State<AddTaskPage> {
       backgroundColor: context.theme.backgroundColor,
       appBar: _appBar(context),
       body: Container(
-        padding: EdgeInsets.only(left: 20, right: 20),
+        padding: EdgeInsets.only(left: Dimensions.width20, right: Dimensions.width20),
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -82,7 +83,7 @@ class _AddTaskPageState extends State<AddTaskPage> {
                       ),
                     ),
                   )),
-                  SizedBox(width: 12,),
+                  SizedBox(width: Dimensions.width12,),
                   Expanded(child: MyInputField(title: 'End Time',
                     hint: _endTime,
                     widget: IconButton(
@@ -102,7 +103,7 @@ class _AddTaskPageState extends State<AddTaskPage> {
                   icon: Icon(Icons.keyboard_arrow_down,
                     color: Colors.grey,
                   ),
-                  iconSize: 32,
+                  iconSize: Dimensions.height32,
                   elevation: 4,
                   style: subTitleStyle,
                   underline: Container(height: 0,),
@@ -127,7 +128,7 @@ class _AddTaskPageState extends State<AddTaskPage> {
                   icon: Icon(Icons.keyboard_arrow_down,
                     color: Colors.grey,
                   ),
-                  iconSize: 32,
+                  iconSize: Dimensions.height32,
                   elevation: 4,
                   style: subTitleStyle,
                   underline: Container(height: 0,),
@@ -146,7 +147,7 @@ class _AddTaskPageState extends State<AddTaskPage> {
                   },
                 ),
               ),
-              SizedBox(height: 18,),
+              SizedBox(height: Dimensions.height18,),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -215,7 +216,7 @@ class _AddTaskPageState extends State<AddTaskPage> {
         Text("Color",
           style: titleStyle,
         ),
-        SizedBox(height: 8,),
+        SizedBox(height: Dimensions.height8,),
         Wrap(
             children: List<Widget>.generate(
                 3,
@@ -228,11 +229,11 @@ class _AddTaskPageState extends State<AddTaskPage> {
                     },
                     child: Padding(padding: EdgeInsets.only(right: 8),
                       child: CircleAvatar(
-                        radius: 14,
+                        radius: Dimensions.height14,
                         backgroundColor: index == 0 ? primaryClr : index == 1 ? pinkClr : yellowClr,
                         child: _selectedColor == index ? Icon(Icons.done,
                           color: Colors.white,
-                          size: 16,
+                          size: Dimensions.height16,
                         ) : Container(),
                       ),
                     ),
@@ -254,16 +255,16 @@ class _AddTaskPageState extends State<AddTaskPage> {
         },
         child: Icon(
           Icons.arrow_back_ios,
-          size: 20,
+          size: Dimensions.height20,
           color: Get.isDarkMode ? Colors.white : Colors.black,
         ),
       ),
       actions: [
         Icon(
           Icons.person,
-          size: 20,
+          size: Dimensions.height20,
         ),
-        SizedBox(width: 20,),
+        SizedBox(width: Dimensions.width20,),
       ],
     );
   }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:todo_app_flutter/ui/theme.dart';
 import 'package:get/get.dart';
+import 'package:todo_app_flutter/utils/dimensions.dart';
 
 class MyInputField extends StatelessWidget {
   const MyInputField(
@@ -19,7 +20,7 @@ class MyInputField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(top: 16),
+      margin: EdgeInsets.only(top: Dimensions.height16),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -28,12 +29,12 @@ class MyInputField extends StatelessWidget {
             style: titleStyle,
           ),
           Container(
-            height: 52,
-            margin: EdgeInsets.only(top: 8.0),
-            padding: EdgeInsets.only(left: 14, right: 14),
+            height: Dimensions.height52,
+            margin: EdgeInsets.only(top: Dimensions.height8),
+            padding: EdgeInsets.only(left: Dimensions.width14, right: Dimensions.width14),
             decoration: BoxDecoration(
-                border: Border.all(color: Colors.grey, width: 1.0),
-                borderRadius: BorderRadius.circular(12)),
+                border: Border.all(color: Colors.grey, width: Dimensions.width1),
+                borderRadius: BorderRadius.circular(Dimensions.height12)),
             child: Row(
               children: [
                 Expanded(
