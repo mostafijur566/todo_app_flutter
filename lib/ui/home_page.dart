@@ -103,17 +103,25 @@ class _HomePageState extends State<HomePage> {
             ),
             Spacer(),
             task.isCompleted == 1 ? Container() :
-            _bottomSheetButton(label: 'Task Completed', onTap: (){}, color: primaryClr, context: context),
+            _bottomSheetButton(
+                label: 'Task Completed',
+                onTap: (){
+                  _taskController.markTaskCompleted(task.id!);
+                  Get.back();
+                },
+                color: primaryClr,
+                context: context
+            ),
 
             _bottomSheetButton(
                 label: 'Delete Task',
                 onTap: (){
                   _taskController.delete(task);
-                  _taskController.getTasks();
                   Get.back();
                 },
                 color: Colors.red[400]!,
-                context: context),
+                context: context
+            ),
 
             SizedBox(height: 20,),
             _bottomSheetButton(label: 'Close', onTap: (){}, color: Colors.red[400]!, context: context, isClose: true),

@@ -63,6 +63,7 @@ class TaskTile extends StatelessWidget {
                   style: GoogleFonts.lato(
                     textStyle: TextStyle(fontSize: 15, color: Colors.grey[100]),
                   ),
+                  textAlign: TextAlign.justify,
                 ),
               ],
             ),
