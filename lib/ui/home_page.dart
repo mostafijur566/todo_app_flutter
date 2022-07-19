@@ -60,6 +60,19 @@ class _HomePageState extends State<HomePage> {
             itemCount: _taskController.taskList.length,
               itemBuilder: (_, index){
               print(_taskController.taskList.length);
+              Task task = _taskController.reversedTaskList[index];
+
+              if(task.repeat == 'Daily'){
+
+                DateTime date = DateFormat.jm().parse(task.startTime.toString());
+                var myTime = DateFormat("HH:mm").format(date);
+
+                notifyHelper.scheduledNotification(
+                  int.parse(myTime.toString().split(":")[0]),
+                  int.parse(myTime.toString().split(":")[1]),
+                  task
+                );
+
                 return AnimationConfiguration.staggeredList(
                     position: index,
                     child: SlideAnimation(
@@ -68,15 +81,49 @@ class _HomePageState extends State<HomePage> {
                           children: [
                             GestureDetector(
                               onTap: (){
-                                _showBottomSheet(context, _taskController.reversedTaskList[index]);
+                                _showBottomSheet(context, task);
                               },
-                              child: TaskTile(_taskController.reversedTaskList[index]),
+                              child: TaskTile(task),
                             )
                           ],
                         ),
                       ),
                     )
                 );
+              }
+
+              if(task.date==DateFormat.yMd().format(_selectedDate)){
+
+                DateTime date = DateFormat.jm().parse(task.startTime.toString());
+                var myTime = DateFormat("HH:mm").format(date);
+
+                notifyHelper.scheduledNotification(
+                    int.parse(myTime.toString().split(":")[0]),
+                    int.parse(myTime.toString().split(":")[1]),
+                    task
+                );
+
+                return AnimationConfiguration.staggeredList(
+                    position: index,
+                    child: SlideAnimation(
+                      child: FadeInAnimation(
+                        child: Row(
+                          children: [
+                            GestureDetector(
+                              onTap: (){
+                                _showBottomSheet(context, task);
+                              },
+                              child: TaskTile(task),
+                            )
+                          ],
+                        ),
+                      ),
+                    )
+                );
+              }
+              else{
+                return Container();
+              }
               }
           );
         })
@@ -189,7 +236,9 @@ class _HomePageState extends State<HomePage> {
             )
         ),
         onDateChange: (date){
-          _selectedDate = date;
+          setState(() {
+            _selectedDate = date;
+          });
         },
       ),
     );

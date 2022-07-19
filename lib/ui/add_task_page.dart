@@ -273,8 +273,8 @@ class _AddTaskPageState extends State<AddTaskPage> {
   _getDateFromUser() async{
     DateTime ? _pickerDate = await showDatePicker(context: context,
         initialDate: DateTime.now(),
-        firstDate: DateTime(2015),
-        lastDate: DateTime(2025),
+        firstDate: DateTime(int.parse(DateFormat.y().format(DateTime.now()).toString()) - 1),
+        lastDate: DateTime(int.parse(DateFormat.y().format(DateTime.now()).toString()) + 1),
     );
 
     if(_pickerDate != null){
