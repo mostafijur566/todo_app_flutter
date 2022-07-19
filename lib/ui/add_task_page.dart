@@ -37,8 +37,6 @@ class _AddTaskPageState extends State<AddTaskPage> {
   List<String> repeatList = [
     "None",
     "Daily",
-    "Weekly",
-    "Monthly"
   ];
 
   int _selectedColor = 0;

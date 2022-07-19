@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:timezone/data/latest.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
+import 'package:todo_app_flutter/ui/notify_page.dart';
 
 import '../models/task_model.dart';
 
@@ -46,7 +47,8 @@ class NotifyHelper{
           android: AndroidNotificationDetails('Your channel ID', 'Your channel name')),
       androidAllowWhileIdle: true,
         uiLocalNotificationDateInterpretation: UILocalNotificationDateInterpretation.absoluteTime,
-      matchDateTimeComponents: DateTimeComponents.time
+      matchDateTimeComponents: DateTimeComponents.time,
+      payload: "${task.title}|"+"${task.note}|"+"${task.color}|"+"${task.startTime}|"
     );
   }
 
@@ -68,17 +70,17 @@ class NotifyHelper{
   }
 
   displayNotification({required String title, required String body}) async{
-    print("doing test");
-    var androidPlatformChannelSpecifics = new AndroidNotificationDetails(
+
+    var androidPlatformChannelSpecifics = AndroidNotificationDetails(
       title, body,  channelDescription: 'your channel desc',
       importance: Importance.max, priority: Priority.high);
 
-    var iOSPlatformChannelSpecifics = new IOSNotificationDetails();
-    var platformChannelSpecifics = new NotificationDetails(
+    var iOSPlatformChannelSpecifics = const IOSNotificationDetails();
+    var platformChannelSpecifics = NotificationDetails(
       android: androidPlatformChannelSpecifics, iOS: iOSPlatformChannelSpecifics
     );
 
-    await flutterLocalNotificationsPlugin.show(0, title, body, platformChannelSpecifics, payload: 'Default_Sound');
+    await flutterLocalNotificationsPlugin.show(0, title, body, platformChannelSpecifics, payload: title);
   }
 
   void requestIOSPermissions() {
@@ -102,6 +104,11 @@ class NotifyHelper{
     else{
       print("Notification Done");
     }
-    Get.to(() => Container(color: Colors.red,));
+    if(payload == 'Theme Changed!'){
+
+    }
+    else{
+      Get.to(() => NotifyPage(label: payload));
+    }
   }
 }
